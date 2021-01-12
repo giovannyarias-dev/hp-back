@@ -1,5 +1,5 @@
 // Servidor de Express
-const express = require('express');
+import express = require('express');
 const http = require('http');
 const socketio = require('socket.io');
 const path = require('path');
@@ -8,30 +8,26 @@ const Sockets = require('./sockets');
 
 class Server {
 
+    public app: express.Application;
+    public port: number;
+    public server: any;
+    public io: SocketIO.Server;
+
     constructor() {
-
         this.app = express();
-
-        this.port = process.env.PORT;
-
-        // Http server
+        this.port = Number(process.env.PORT);
         this.server = http.createServer(this.app);
-
-        // Socket start
         this.io = socketio(this.server, {
             cors: {
-                //origin: "http://localhost:3000",
-                origin: "http://happyprojectapp.s3-website.us-east-2.amazonaws.com",
+                origin: "http://localhost:3000",
+                //origin: "http://happyprojectapp.s3-website.us-east-2.amazonaws.com",
                 methods: ["GET", "POST"]
             }
         });
     }
 
     middlewares() {
-
-        // Public directory
         this.app.use(express.static(path.resolve(__dirname, '../public')));
-
     }
 
     socketsConfiguration() {
@@ -51,7 +47,6 @@ class Server {
             console.log('Server running in port:', this.port);
         });
     }
-
 }
 
 module.exports = Server;
