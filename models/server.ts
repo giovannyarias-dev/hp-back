@@ -28,6 +28,12 @@ class Server {
 
     middlewares() {
         this.app.use(express.static(path.resolve(__dirname, '../public')));
+        this.app.get('/auth', (req, res) => {
+            console.log('entraaa');
+            res.json({
+                ok:true
+            });
+        });
     }
 
     socketsConfiguration() {

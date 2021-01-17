@@ -29,10 +29,6 @@ class Sockets {
       if ( this.revealCards ) {
         socket.emit('reveal-cards', { reveal: true });
       }
-      console.log('curret-users', this.userList.usersOnPlanning);
-
-
-
 
       socket.on('login', (data) => {
         const userService = new UserService();

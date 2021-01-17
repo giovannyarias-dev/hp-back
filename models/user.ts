@@ -58,5 +58,17 @@ export default class User {
       userObj.email
     );
   }
+
+  public toJSON()
+  {
+    return {
+      name: this.name, 
+      image: this.image, 
+      email: this.email,
+      role: this.role, 
+      effort: this.effort,
+      id: this.id
+    };
+  }
   
 }
