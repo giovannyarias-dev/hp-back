@@ -1,13 +1,12 @@
 // Servidor de Express
 import express = require('express');
-import router from '../routes/router';
 const http = require('http');
 const socketio = require('socket.io');
 const path = require('path');
 
 const Sockets = require('./sockets');
 
-import auth from '../routes/router';
+import auth from '../routes/auth';
 
 class Server {
 
@@ -39,7 +38,7 @@ class Server {
             });
         });
 
-        this.app.get('/api/auth', router);
+        this.app.use('/api/auth', auth);
     }
 
     socketsConfiguration() {

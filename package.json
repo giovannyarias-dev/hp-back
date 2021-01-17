@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon dist/index.js",
     "start": "node index.js",
-    "html": "copyfiles public/*.html dist",
+    "html": "copyfiles --up 1 src/public/*.html dist",
     "build": "tsc && npm run html"
   },
   "author": "",
