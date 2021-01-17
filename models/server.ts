@@ -1,11 +1,13 @@
 // Servidor de Express
 import express = require('express');
+import router from '../routes/router';
 const http = require('http');
 const socketio = require('socket.io');
 const path = require('path');
 
 const Sockets = require('./sockets');
-const auth = require('../routes/auth');
+
+import auth from '../routes/router';
 
 class Server {
 
@@ -29,7 +31,15 @@ class Server {
 
     middlewares() {
         this.app.use(express.static(path.resolve(__dirname, '../public')));
-        this.app.get('/auth', auth);
+        
+        this.app.get('/api', (req, res) => {
+            console.log('entraaa');
+            res.json({
+                ok:'esoooo'
+            });
+        });
+
+        this.app.get('/api/auth', router);
     }
 
     socketsConfiguration() {
