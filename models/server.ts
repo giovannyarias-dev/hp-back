@@ -5,6 +5,7 @@ const socketio = require('socket.io');
 const path = require('path');
 
 const Sockets = require('./sockets');
+const auth = require('../routes/auth');
 
 class Server {
 
@@ -28,12 +29,7 @@ class Server {
 
     middlewares() {
         this.app.use(express.static(path.resolve(__dirname, '../public')));
-        this.app.get('/auth', (req, res) => {
-            console.log('entraaa');
-            res.json({
-                ok:true
-            });
-        });
+        this.app.get('/auth', auth);
     }
 
     socketsConfiguration() {
