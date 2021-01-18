@@ -2,8 +2,8 @@ export default class Response {
 
   constructor(
     private _ok: boolean,  
-    private _result: any,
-    private _message?: string,
+    private _res?: any,
+    private _msg?: string,
   ) {}
 
   public set ok( ok ) {
@@ -14,20 +14,29 @@ export default class Response {
     return this._ok;
   }
 
-  public get result() {
-    return this._result;
+  public get res() {
+    return this._res;
   }
 
-  public set result( result ) {
-    this._result = result;
+  public set res( result ) {
+    this._res = result;
   }
 
-  public get message() {
-    return this._message;
+  public get msg() {
+    return this._msg;
   }
 
-  public set message( message ) {
-    this._message = message;
+  public set msg( message ) {
+    this._msg = message;
+  }
+
+  public toJSON()
+  {
+    return {
+      ok: this._ok, 
+      res: this._res, 
+      msg: this._msg,
+    };
   }
   
 }      

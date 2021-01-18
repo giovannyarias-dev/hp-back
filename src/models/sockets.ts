@@ -31,7 +31,7 @@ class Sockets {
       }
 
       socket.on('login', (data) => {
-        const userService = new UserService();
+        /*const userService = new UserService();
         const auditService = new AuditService();
         userService.login(data._email, data._name).then( user => {
           auditService.saveEvent( user.id, eEvents.LOGGED_IN );
@@ -39,7 +39,7 @@ class Sockets {
           this.io.emit('current-users', this.userList.usersOnPlanning);
         }, err => {
           console.log('entra al error final');
-        });
+        });*/
       });
 
       socket.on('logout', (data) => {
@@ -47,11 +47,13 @@ class Sockets {
       });
 
       socket.on('select-user', (data) => {
-        const userService = new UserService();
+        /*const userService = new UserService();
+        
         userService.login(data.email, data.name).then( user => {
           this.userList.addUserToPlanning( User.convert( user ) );
           this.io.emit('current-users', this.userList.usersOnPlanning);
-        }, err => {});
+        }, err => {});*/
+
       });
 
       socket.on('set-effort', (data) => {

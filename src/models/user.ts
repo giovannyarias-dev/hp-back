@@ -3,12 +3,14 @@ const { v4: uuidv4 } = require('uuid');
 export default class User {
 
   constructor(
-    private _name: string , 
-    private _image: string, 
+    private _name: string, 
     private _email: string,
+    private _image: string, 
+    private _uid?: string,
     private _role?: string | null | undefined, 
     private _effort?: string | null | undefined,
-    private _id: string = uuidv4()
+    private _id: string = uuidv4(),
+    private _enabled:number = 1
   ) {}
 
   public set id(id: string) {
@@ -51,6 +53,22 @@ export default class User {
     this._effort = effort;
   }
 
+  public set uid( uid: string | undefined) {
+    this._uid = uid;
+  }
+
+  public get uid() {
+    return this._uid;
+  }
+
+  public set enabled( enabled: number) {
+    this._enabled = enabled;
+  }
+
+  public get enabled() {
+    return this._enabled;
+  }
+
   public static convert(userObj: any):User {
     return new this(
       userObj.name,
@@ -67,7 +85,9 @@ export default class User {
       email: this.email,
       role: this.role, 
       effort: this.effort,
-      id: this.id
+      id: this.id,
+      uid: this._uid,
+      enabled: this._enabled
     };
   }
   

@@ -5,15 +5,14 @@ import MySQL from '../mysql/mysql';
 
 export default class UserService {
 
-  public async login(email: string, name: string) {
+  public async login( user: User) {
 
-    let userInDB = await this.getUserByEmail( email ).then( user => user, err => { throw err });
+    let userInDB = await this.getUserByEmail( user.email ).then( userFound => userFound, err => { throw err });
 
     if( userInDB ) {
       return userInDB;
     } else {
-      const newUser = new User(name, '', email);
-      return await this.saveUser( newUser ).then( user => user, err => { throw err });
+      return await this.saveUser( user ).then( user => user, err => { throw err });
     }
   }
 
@@ -28,9 +27,11 @@ export default class UserService {
   }
 
   private async saveUser( user: User ) {
+    const uid = MySQL.instance.cnn.escape(user.name);
     const email = MySQL.instance.cnn.escape(user.email);
     const name = MySQL.instance.cnn.escape(user.name);
-    const query:string = `INSERT INTO users (email, name) VALUES (${ email }, ${ name })`;
+    const image = MySQL.instance.cnn.escape(user.image);
+    const query:string = `INSERT INTO users (uid, email, name, image) VALUES (${ uid }, ${ email }, ${ name }, ${ image })`;
 
     return await MySQL.executeQuery( query ).then( res => {
       user.id = res.insertId;

@@ -30,14 +30,7 @@ class Server {
 
     middlewares() {
         this.app.use(express.static(path.resolve(__dirname, '../public')));
-        
-        this.app.get('/api', (req, res) => {
-            console.log('entraaa');
-            res.json({
-                ok:'esoooo'
-            });
-        });
-
+        this.app.use(express.json());
         this.app.use('/api/auth', auth);
     }
 
