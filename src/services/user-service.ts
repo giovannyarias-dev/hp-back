@@ -1,5 +1,3 @@
-import { eErrors } from '../enums/eErrors';
-import Response from '../models/response';
 import User from '../models/user';
 import MySQL from '../mysql/mysql';
 

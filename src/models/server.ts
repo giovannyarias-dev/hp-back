@@ -8,6 +8,7 @@ const cors = require('cors');
 const Sockets = require('./sockets');
 
 import auth from '../routes/auth';
+import teams from '../routes/teams';
 
 class Server {
 
@@ -31,9 +32,18 @@ class Server {
 
     middlewares() {
         this.app.use(cors());
+
         this.app.use(express.static(path.resolve(__dirname, '../public')));
+
         this.app.use(express.json());
+
         this.app.use('/api/auth', auth);
+        this.app.use('/api/teams', teams);
+
+
+        /*this.app.get('/api/teams/user', (req, res) => {
+            console.log('entra');
+        })*/
     }
 
     socketsConfiguration() {
