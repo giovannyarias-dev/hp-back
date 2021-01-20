@@ -5,19 +5,19 @@ export default class User {
   constructor(
     private _name: string, 
     private _email: string,
-    private _image: string, 
-    private _uid?: string,
-    private _role?: string | null | undefined, 
+    private _role: string | null | undefined = '', 
     private _effort?: string | null | undefined,
-    private _id: string = uuidv4(),
+    private _image?: string, 
+    private _uid?: string,
+    private _id?: string | undefined,
     private _enabled:number = 1
   ) {}
 
-  public set id(id: string) {
+  public set id(id: string | undefined) {
     this._id = id;
   }
 
-  public get id() {
+  public get id(): string | undefined {
     return this._id;
   }
 
@@ -25,11 +25,11 @@ export default class User {
     return this._name;
   }
 
-  public set image(image: string) {
+  public set image(image: string | undefined) {
     this._image = image;
   }
 
-  public get image() {
+  public get image(): string | undefined {
     return this._image;
   }
 
@@ -69,24 +69,16 @@ export default class User {
     return this._enabled;
   }
 
-  public static convert(userObj: any):User {
-    return new this(
-      userObj.name,
-      userObj.image,
-      userObj.email
-    );
-  }
-
   public toJSON()
   {
     return {
       name: this.name, 
-      image: this.image, 
       email: this.email,
       role: this.role, 
       effort: this.effort,
-      id: this.id,
+      image: this.image, 
       uid: this._uid,
+      id: this.id,
       enabled: this._enabled
     };
   }

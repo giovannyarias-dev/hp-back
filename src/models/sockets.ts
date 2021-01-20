@@ -25,35 +25,18 @@ class Sockets {
 
       console.log('Connected Client');
 
-      this.io.emit('current-users', this.userList.usersOnPlanning);
       if ( this.revealCards ) {
         socket.emit('reveal-cards', { reveal: true });
       }
-
-      socket.on('login', (data) => {
-        /*const userService = new UserService();
-        const auditService = new AuditService();
-        userService.login(data._email, data._name).then( user => {
-          auditService.saveEvent( user.id, eEvents.LOGGED_IN );
-          this.userList.addUserToPlanning( User.convert( user ) );
-          this.io.emit('current-users', this.userList.usersOnPlanning);
-        }, err => {
-          console.log('entra al error final');
-        });*/
-      });
 
       socket.on('logout', (data) => {
         console.log('Eliminar usuario de lista');
       });
 
-      socket.on('select-user', (data) => {
-        /*const userService = new UserService();
-        
-        userService.login(data.email, data.name).then( user => {
-          this.userList.addUserToPlanning( User.convert( user ) );
-          this.io.emit('current-users', this.userList.usersOnPlanning);
-        }, err => {});*/
-
+      socket.on('add-user-to-planning', (data) => {
+        this.userList.addUserToPlanning( data );
+        this.io.emit('current-users', this.userList.usersOnPlanning);
+        console.log(' emite cuurent-users');
       });
 
       socket.on('set-effort', (data) => {
