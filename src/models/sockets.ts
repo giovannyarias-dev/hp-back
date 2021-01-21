@@ -1,7 +1,3 @@
-import { eEvents } from '../enums/eEvents';
-import AuditService from '../services/audit-service';
-import UserService from '../services/user-service';
-import User from './user';
 import UserList from './user-list';
 
 class Sockets {
@@ -29,14 +25,14 @@ class Sockets {
         socket.emit('reveal-cards', { reveal: true });
       }
 
-      socket.on('logout', (data) => {
-        console.log('Eliminar usuario de lista');
+      socket.on('add-user-planning', (data) => {
+        this.userList.addUserToPlanning( data.user, data.isTeamUser );
+        this.io.emit('current-users', this.userList.usersOnPlanning);
       });
 
-      socket.on('add-user-to-planning', (data) => {
-        this.userList.addUserToPlanning( data );
+      socket.on('remove-user-planning', (data) => {
+        this.userList.removeUserPlanning( data.idUser );
         this.io.emit('current-users', this.userList.usersOnPlanning);
-        console.log(' emite cuurent-users');
       });
 
       socket.on('set-effort', (data) => {
