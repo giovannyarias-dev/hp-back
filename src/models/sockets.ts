@@ -40,7 +40,7 @@ class Sockets {
       });
 
       socket.on('set-effort', (data) => {
-        this.userList.setEffort(data.email, data.effort);
+        this.userList.setEffort(data.idUser, data.effort);
         this.io.emit('current-users', this.userList.usersOnPlanning);
       });
 

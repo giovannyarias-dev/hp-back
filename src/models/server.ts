@@ -1,4 +1,4 @@
-// Servidor de Express
+// Express Server
 import express = require('express');
 const http = require('http');
 const socketio = require('socket.io');
@@ -23,8 +23,7 @@ class Server {
         this.server = http.createServer(this.app);
         this.io = socketio(this.server, {
             cors: {
-                origin: "http://localhost:3000",
-                //origin: "http://happyprojectapp.s3-website.us-east-2.amazonaws.com",
+                origin: process.env.HOST,
                 methods: ["GET", "POST"]
             }
         });
@@ -39,11 +38,6 @@ class Server {
 
         this.app.use('/api/auth', auth);
         this.app.use('/api/teams', teams);
-
-
-        /*this.app.get('/api/teams/user', (req, res) => {
-            console.log('entra');
-        })*/
     }
 
     socketsConfiguration() {

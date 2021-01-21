@@ -38,9 +38,9 @@ export default class UserList {
         return this._usersOnPlanning;
     }
 
-    public setEffort(email: string, effort: string) {
+    public setEffort(idUser: number, effort: string) {
         this._usersOnPlanning = this._usersOnPlanning.map((user: User) => {
-            if (user.email === email) {
+            if (user.id === idUser) {
                 user.effort = effort;
             }
             return user;

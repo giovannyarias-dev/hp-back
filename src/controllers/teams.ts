@@ -20,5 +20,5 @@ export const teamsByUser = async ( req:any, res:any = response ) => {
     return res.status( 500 ).json({ response })
   }
 
-  return res.status( 201 ).json( response );
+  return res.status( 200 ).json( response );
 };

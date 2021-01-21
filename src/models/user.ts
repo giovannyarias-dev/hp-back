@@ -9,15 +9,15 @@ export default class User {
     private _effort?: string | null | undefined,
     private _image?: string, 
     private _uid?: string,
-    private _id?: string | undefined,
+    private _id?: number | undefined,
     private _enabled:number = 1
   ) {}
 
-  public set id(id: string | undefined) {
+  public set id(id: number | undefined) {
     this._id = id;
   }
 
-  public get id(): string | undefined {
+  public get id(): number | undefined {
     return this._id;
   }
 
